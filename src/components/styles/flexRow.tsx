@@ -1,4 +1,3 @@
-import { HTMLAttributes, ReactNode } from "react";
 import tw from "tailwind-styled-components";
 
 const FlexRow = tw.section` 
