@@ -3,77 +3,16 @@ import FlexCol from "./styles/flexCol";
 import FlexRow from "./styles/flexRow";
 import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
 import { ResultPokemon, Type } from "@/types/dataPokemons";
-import { Box, Button, Modal, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { useState } from "react";
 import ModalMorePokemon from "./modalMorePokemon";
-const typesPokemonColor: { [name: string]: { color: string } } = {
-  normal: {
-    color: "",
-  },
-  fire: {
-    color: "text-yellow-700",
-  },
-  water: {
-    color: "text-blue-600",
-  },
-  grass: {
-    color: "text-[#104435]",
-  },
-  flying: {
-    color: "text-[#6884d9]",
-  },
-  fighting: {
-    color: "text-[#f2516d]",
-  },
-  poison: {
-    color: "text-[#965fc5]",
-  },
-  electric: {
-    color: "text-[#f2cd21]",
-  },
-  ground: {
-    color: "text-[#b5a687];",
-  },
-  rock: {
-    color: " text-[#91939a]",
-  },
-  psychic: {
-    color: "text-[#964fc1]",
-  },
-  ice: {
-    color: "text-[#a1cbe4];",
-  },
-  bug: {
-    color: "",
-  },
-  ghost: {
-    color: "",
-  },
-  steel: {
-    color: "",
-  },
-  dragon: {
-    color: "text-yellow-700",
-  },
-  dark: {
-    color: "",
-  },
-  fairy: {
-    color: "text-[#964fc1]",
-  },
-};
+import { useColorTitle } from "@/customHook/useColorPokemon";
+
 const Target = ({ pokemon }: { pokemon: ResultPokemon }) => {
   const [seeMore, setSeeMore] = useState(false);
   const { abilities, name, height, weight, moves, sprites, types } = pokemon;
   const moves_necesary = moves.length > 3 ? moves.splice(0, 3) : moves;
-  const colorTitle = () => {
-    const tipo = types.find((type: Type) => {
-      return typesPokemonColor;
-    });
-    return tipo?.type && typesPokemonColor[tipo?.type?.name].color;
-  };
-  types[0].type;
-  const color = colorTitle();
+  const color = useColorTitle(types);
   const ChangeSeeMore = () => {
     setSeeMore((current) => !current);
   };
