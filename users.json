@@ -1,0 +1,17 @@
+[
+  {
+    "email": "jonhDoe@gmail.com",
+    "password": "JohnDoe",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvbmhEb2VAZ21haWwuY29tIiwicGFzc3dvcmQiOiJKb2huRG9lIn0.qWYfx4ARzQL7nH3ko-IIM98ty1BVUDCfwV7ot4b6E2k"
+  },
+  {
+    "email": "juana@gmail.com",
+    "password": "juana123",
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6Imp1YW5hQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoianVhbmExMjMifQ.Jisri0MURWmCMYKL7w1jRmhpiOIsov6wefgN9RLnL7I"
+  },
+  {
+    "email": "carlosGutierrez@gmail.com",
+    "password": "Carlos123#",
+    "token": "eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6ImNhcmxvc0d1dGllcnJlekBnbWFpbC5jb20iLCJwYXNzd29yZCI6IkNhcmxvczEyMyMifQ.8UhPGL5BVaYKuArKoTnZehHTS5QCWT1cid0qAjj2j_U"
+  }
+]
