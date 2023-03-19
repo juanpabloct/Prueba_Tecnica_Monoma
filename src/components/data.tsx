@@ -6,13 +6,17 @@ import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import FlexCol from "./styles/flexCol";
 import Grid from "./styles/grid";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-import CatchingPokemonIcon from "@mui/icons-material/CatchingPokemon";
+
 import Target from "./target";
+import { useAccesUser } from "@/customHook/useAccesUser";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Data = ({ id }: { id: number }) => {
   const router = useRouter();
-
+  const { session } = useAccesUser();
+  useEffect(() => {
+    !session && router.push("/");
+  }, [router, session]);
   const [page, setPage] = useState(id);
   const [data, setData] = useState<ResultPokeapi>();
   useEffect(() => {
@@ -42,6 +46,9 @@ const Data = ({ id }: { id: number }) => {
     };
     getPokemon();
   }, [data, page]);
+  if (pokemons.length === 0) {
+    return <CircularProgress title="Cargando Informacion" />;
+  }
   return (
     <FlexCol className="flex-col w-full">
       <Pagination count={paginas} page={page} onChange={handleChange} />
