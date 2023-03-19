@@ -1,27 +1,46 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const AccesUserSlice = createSlice({
-  name: "acces",
-  initialState: {
-    acces: {
-      user: "",
-      token: "",
-    },
-    error: {
-      message: "",
-      showError: false,
-      error: true,
-    },
+interface UserAcces {
+  data?: Data | null;
+  error: Error;
+  loading: boolean;
+}
+export interface Data {
+  user: string;
+  token: string;
+}
+export interface Error {
+  message: string;
+  showError: boolean;
+  error: boolean;
+}
+const initialState: UserAcces = {
+  data: null,
+  error: {
+    message: "",
+    showError: false,
+    error: false,
   },
+  loading: false,
+};
+
+const AccesUserSlice = createSlice({
+  name: "Session",
+  initialState: initialState,
   reducers: {
-    AccesUser: (state, { payload }) => {
-      state.acces = payload;
+    setData: (state, { payload }: { payload: Data | null }) => {
+      state.data = payload;
+      state.loading = false;
     },
-    ChangeError: (state, { payload }) => {
+    setError: (state, { payload }: { payload: Error }) => {
       state.error = payload;
+      state.loading = false;
+    },
+    setLoading: (state) => {
+      state.loading = true;
     },
   },
 });
 
-export const { AccesUser, ChangeError } = AccesUserSlice.actions;
+export const { setData, setError, setLoading } = AccesUserSlice.actions;
 export default AccesUserSlice.reducer;
