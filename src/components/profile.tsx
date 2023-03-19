@@ -1,17 +1,11 @@
 import Image from "next/image";
 import user from "../assets/profile.svg";
 import FlexRow from "./styles/flexRow";
-import AccountCircleIcon from "@material-ui/icons/AccountCircle";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 const Profile = () => {
   return (
     <FlexRow className="h-full items-center">
-      <Image
-        src={user}
-        alt=""
-        width={45}
-        color={"white"}
-        className="rounded-full border-2 border-white"
-      />
+      <AccountCircleIcon sx={{ fontSize: "3rem", color: "white" }} />
     </FlexRow>
   );
 };
