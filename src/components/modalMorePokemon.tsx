@@ -13,7 +13,6 @@ interface Props {
   pokemon: ResultPokemon;
 }
 const ModalMorePokemon = ({ seeMore, ChangeSeeMore, pokemon }: Props) => {
-  console.log(pokemon);
   const { abilities, name, height, weight, moves, sprites, types } = pokemon;
   const moves_necesary = moves.length > 3 ? moves.splice(0, 3) : moves;
   const color = useColorTitle(types);
