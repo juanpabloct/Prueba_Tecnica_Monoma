@@ -1,5 +1,4 @@
 import {
-  Alert,
   Button,
   FormControl,
   IconButton,
@@ -14,7 +13,16 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import LoginIcon from "@mui/icons-material/Login";
 import dataLogin from "../../users.json";
 import RefreshIcon from "@mui/icons-material/Refresh";
+import { setLoading, setData, setError } from "@/reducers/userAcces";
+import { useDispatch } from "react-redux";
+import { useAccesUser } from "@/customHook/useAccesUser";
+import Notification from "./notification";
+import ErrorIcon from "@mui/icons-material/Error";
+import FlexRow from "./styles/flexRow";
 const Login = () => {
+  const { error, loading, session } = useAccesUser();
+
+  const dispatch = useDispatch();
   const [showPassword, setshowPassword] = useState(true);
   const [email, setEmail] = useState({ email: "", isValid: false });
   const [password, setPassword] = useState("");
@@ -24,20 +32,32 @@ const Login = () => {
     event.preventDefault();
   };
   const accesUser = () => {
-    dataLogin.some((user) => {
-      user.email === email.email && user.password === password;
-    });
+    dispatch(setLoading());
+    setTimeout(() => {
+      const acces = dataLogin.find(
+        (user) => user.email === email.email && user.password === password
+      );
+      if (acces) {
+        error.error && dispatch(setError({ ...error, error: false }));
+        dispatch(setData({ token: acces.token, user: acces.token }));
+      } else {
+        dispatch(
+          setError({ error: true, message: "User Invalid", showError: true })
+        );
+      }
+    }, 3000);
   };
   return (
     <>
-      <div className="absolute top-0 right-0 ">
-        <Alert onClose={() => {}}>
-          This is a success alert — check it out!
-        </Alert>
-      </div>
-
+      {error.showError && <Notification />}
       <FlexCol className="  gap-10 w-4/5 shadow-md shadow-black rounded-md">
         <LoginIcon sx={{ fontSize: "4rem" }} />
+        {error.error && (
+          <FlexRow>
+            <ErrorIcon color={"error"} />
+            <p className="text-red-500">Error Session</p>
+          </FlexRow>
+        )}
         <FlexCol className="gap-8">
           <TextField
             error={email.email.length > 0 ? !email.isValid : false}
@@ -78,10 +98,18 @@ const Login = () => {
             />
           </FormControl>
         </FlexCol>
-        <Button variant="outlined" color="info" className="mb-4">
-          <span className="pr-2">
-            <RefreshIcon className="animate-spin" />
-          </span>
+        <Button
+          variant="outlined"
+          color="info"
+          className="mb-4"
+          onClick={() => accesUser()}
+          disabled={!(email.isValid && password.length > 0)}
+        >
+          {loading && (
+            <span className="pr-2">
+              <RefreshIcon className="animate-spin" />
+            </span>
+          )}
           Login
         </Button>
       </FlexCol>
