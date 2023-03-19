@@ -19,7 +19,9 @@ import { useAccesUser } from "@/customHook/useAccesUser";
 import Notification from "./notification";
 import ErrorIcon from "@mui/icons-material/Error";
 import FlexRow from "./styles/flexRow";
+import { useRouter } from "next/dist/client/router";
 const Login = () => {
+  const router = useRouter();
   const { error, loading, session } = useAccesUser();
 
   const dispatch = useDispatch();
@@ -40,6 +42,14 @@ const Login = () => {
       if (acces) {
         error.error && dispatch(setError({ ...error, error: false }));
         dispatch(setData({ token: acces.token, user: acces.token }));
+        dispatch(
+          setError({
+            message: "Usuario accedido correctamente",
+            error: false,
+            showError: true,
+          })
+        );
+        setTimeout(() => router.push("/dataPokemons/0"), 2000);
       } else {
         dispatch(
           setError({ error: true, message: "User Invalid", showError: true })
