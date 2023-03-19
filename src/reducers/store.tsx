@@ -1,9 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
+import AccesUser from "./userAcces";
 
-const reducer = {};
+const rootReducer = combineReducers({
+  accesUser: AccesUser,
+});
+export const store = configureStore({ reducer: rootReducer });
 
-export default function createStore() {
-  return configureStore({
-    reducer,
-  });
-}
+export type RootState = ReturnType<typeof rootReducer>;
