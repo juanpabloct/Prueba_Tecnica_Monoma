@@ -1,18 +1,17 @@
 import Link from "next/link";
-import { ReactNode } from "react";
 import Profile from "./profile";
 import FlexRow from "./styles/flexRow";
 
+import HomeIcon from "@mui/icons-material/Home";
 const Navigation = () => {
   return (
-    <header className="bg-slate-700 h-14 w-full">
-      <nav className="w-full flex justify-around h-full items-center">
-        <FlexRow className="text-white justify-evenly gap-10">
-          <Link href={"/"}>Ir a Pagina Principal</Link>
-          <Link href={"/hola"}>Saludaaaaa</Link>
-        </FlexRow>
-        <FlexRow className="h-full flex items-center">
-          <input className="focus:outline-none border-blue-700 border  h-1/2" />
+    <header className="bg-slate-700 h-14 w-full flex items-center justify-center">
+      <nav className="w-4/5 flex justify-between h-full items-center">
+        <FlexRow className="text-white justify-evenly gap-10 items-center">
+          <Link href={"/"} className="items-center flex">
+            <HomeIcon fontSize="medium" />
+            Home
+          </Link>
         </FlexRow>
         <FlexRow className="h-full flex items-center">
           <Profile />
